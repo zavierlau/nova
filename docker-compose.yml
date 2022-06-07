@@ -1,0 +1,82 @@
+version: '2'
+services:
+  web:
+    # Nginx WebServer. links to PHP Container.
+    image: sheadmin/dev3:php2
+    ports: 
+      - "443:443"
+      - "80:80"
+    restart: always
+    volumes:
+      - ./public_html/code:/code
+      # Nginx main Conf.
+      - ./conf/nginx.conf:/etc/nginx/sites-available/default
+      - ./cert:/etc/nginx/cert
+        # - ./conf/php.ini:/etc/php/7.4/fpm/php.ini  
+      # Persistent Log of Nginx Server
+      - ./LOG/nginx:/var/log/nginx
+      - ./mysql:/var/lib/mysql
+      #for dev4:v2 image
+      - ./conf/supervisord.conf:/etc/supervisord.conf
+      # Persistent Log of PHP-FPM
+      - ./LOG/fpm:/var/log/fpm
+      - ./LOG/horizon:/var/log/horizon
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+   
+  mysql:
+    # MySql Container.
+    image: mysql:5.7
+    ports:
+      - "3386:3306"
+    restart: always
+    volumes:
+      # Persistent Data Volume
+      - ./mysql:/var/lib/mysql
+      # Custom CNF file. remove if you don't have any cutomization
+      - ./mysql.cnf:/etc/mysql/conf.d/01-custom.cnf
+    environment:
+      # Auth Information
+      - MYSQL_ROOT_PASSWORD=secret
+      #- MYSQL_DATABASE=
+      #- MYSQL_USER=SomeText
+      #- MYSQL_PASSWORD=SomeText  
+    command: "--innodb_use_native_aio=0"
+
+
+  cms:
+    # Nginx WebServer. links to PHP Container.
+    image: sheadmin/dev3:php2
+    # ports:
+            # - "443:443"
+            # - "80:80"
+    restart: always
+    volumes:
+      - ./public_html/code2:/code
+      - ./public_html/code/wp-content/uploads:/code/wp-content/uploads  
+      # Nginx main Conf.
+      - ./conf/nginx2.conf:/etc/nginx/sites-available/default
+      - ./cert:/etc/nginx/cert
+        # - ./conf/php.ini:/etc/php/7.4/fpm/php.ini  
+      # Persistent Log of Nginx Server
+      - ./LOG/nginx2:/var/log/nginx
+      - ./mysql:/var/lib/mysql
+      #for dev4:v2 image
+      - ./conf/supervisord.conf:/etc/supervisord.conf
+      # Persistent Log of PHP-FPM
+      - ./LOG/fpm:/var/log/fpm
+      - ./LOG/horizon:/var/log/horizon
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+
+
+networks:
+  default:
+    external:
+      name: proxy
