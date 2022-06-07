@@ -23,5 +23,5 @@ jobs:                             # 需要执行的任务，可以有多个任�
         SOURCE: "./"
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}    #阿里云的 ip
         REMOTE_USER: ${{ secrets.REMOTE_USER }}    #阿里云用户
-        TARGET: "/opt/webwiki/docs"       #被部署的服务器路径 
+        TARGET: "/code/"       #被部署的服务器路径 
 
