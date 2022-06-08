@@ -39,9 +39,9 @@ jobs:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
           SSH_HOST: ${{ secrets.REMOTE_HOST }}
         
-        run: docker up 'docker-compose restart'
+        run: docker ps 'docker-compose restart'
       - 
         name: Check docker 
-        run: docker check 'docker ps'
+        run: docker-compose restart 'docker restart'
         
         
