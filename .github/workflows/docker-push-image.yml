@@ -31,3 +31,17 @@ jobs:
           file: ./dockerfile/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/dev1:va
+          
+      -
+        name: Run ssh command 
+        env:
+          SSH_USER: ${{ secrets.REMOTE_USER }}
+          SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SSH_HOST: ${{ secrets.REMOTE_HOST }}
+        
+        run: docker up 'docker-compose restart'
+      - 
+        name: Check docker 
+        run: docker check 'docker ps'
+        
+        
