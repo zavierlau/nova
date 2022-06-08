@@ -80,12 +80,12 @@ RUN rm -f /etc/nginx/sites-available/default
 copy ./nginx.default /etc/nginx/sites-available/default
 copy ./info.php	/var/www/html/
 
-ADD ./start.sh /start.sh
-RUN chmod 755 /start.sh
+#ADD ./start.sh /start.sh
+#RUN chmod 755 /start.sh
 
 VOLUME ["/var/lib/mysql", "/var/run/sshd"]
 
 EXPOSE 22 80 443 3386
-CMD ["/bin/bash", "/start.sh"]
+#CMD ["/bin/bash", "/start.sh"]
 #CMD ["supervisord", "-n"]
 
