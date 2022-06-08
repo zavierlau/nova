@@ -39,7 +39,7 @@ jobs:
           SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
           SSH_HOST: ${{ secrets.REMOTE_HOST }}
         
-        run: docker ps 'docker-compose restart'
+        run: docker ps -l 'docker-compose restart'
       - 
         name: Check docker 
         run: docker-compose restart 'docker restart'
