@@ -8,13 +8,13 @@ RUN date
 
 #update the repository to US
 RUN rm -f /etc/apt/sources.list
-copy ./sources.list /etc/apt/sources.list
+#copy ./sources.list /etc/apt/sources.list
 
 #redis
 #import the repository of redies 
-copy ./dotdeb.org.list /etc/apt/sources.list.d/
+#copy ./dotdeb.org.list /etc/apt/sources.list.d/
 #add the public key 
-copy ./dotdeb.gpg /tmp/
+#copy ./dotdeb.gpg /tmp/
 RUN apt-key add /tmp/dotdeb.gpg
 #RUN wget -q -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
@@ -77,8 +77,8 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*RUN apt-get clean
 
 RUN rm -f /etc/nginx/sites-available/default
-copy ./nginx.default /etc/nginx/sites-available/default
-copy ./info.php	/var/www/html/
+#copy ./nginx.default /etc/nginx/sites-available/default
+#copy ./info.php	/var/www/html/
 
 
 
