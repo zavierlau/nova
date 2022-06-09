@@ -44,7 +44,8 @@ jobs:
             docker rmi sheadmin/dev1:va
             docker ps
             docker run sheadmin/dev1:va 
-            
+          
+          script2: ls $$ du -d 1 -h 
         
 
 
