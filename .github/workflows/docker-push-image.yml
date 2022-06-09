@@ -34,14 +34,14 @@ jobs:
           
       -
         name: Run ssh command 
-        id: ssh
-        uses: D3rHase/ssh-command-action@{version}
+        uses: tarunjangra/ssh-remote-cmd@v1
         with:
-          HOST: ${{secrets.REMOTE_HOST}}                             # Remote server address / ip - Required: true
-          PORT: ${{secrets.PORT}}                             # Remote server port -  Default: 22 - Required: false
-          USER: ${{secrets.REMOTE_USER}}                             # Remote server user - Required: true
-          PRIVATE_SSH_KEY: ${{secrets.SERVER_SSH_KEY}}       # Private ssh key registered on the remote server - Required: true
-          COMMAND: ${{secrets.COMMAND}}                       # Command to be executed - Default: echo Hello world! - Required: false
+          command: |
+            cd /tmp
+            ls -a
+            host: ${{ secrets.REMOTE_HOST }}
+            user: root
+            key: ${{ secrets.SERVER_SSH_KEY}}
 
 
         
