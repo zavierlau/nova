@@ -33,15 +33,14 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/dev1:va
           
       -
-        name: Run ssh command 
-        uses: tarunjangra/ssh-remote-cmd@v1
+        name: Run ssh command uses: appleboy/ssh-action@master
         with:
-          command: |
-            cd /tmp
-            ls -a
-            host: ${{ secrets.REMOTE_HOST }}
-            user: root
-            key: ${{ secrets.SERVER_SSH_KEY}}
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          script: df -h
+        
 
 
         
