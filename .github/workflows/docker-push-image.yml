@@ -35,14 +35,14 @@ jobs:
       -
         name: Run ssh command 
         id: ssh
-        uses: arthurvanl/action-exec-ssh@v1
+        uses: D3rHase/ssh-command-action@{version}
         with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: root
-          password: ${{ secrets.SERVER_SSH_KEY }}
-          ssh_1: df -h
-          ssh_2: docker ps
-          #ssh_3: '<SSH_COMMAND>'
-          #ssh_4: '<SSH_COMMAND>'
+          HOST: ${{secrets.REMOTE_HOST}}                             # Remote server address / ip - Required: true
+          PORT: ${{secrets.PORT}}                             # Remote server port -  Default: 22 - Required: false
+          USER: ${{secrets.REMOTE_USER}}                             # Remote server user - Required: true
+          PRIVATE_SSH_KEY: ${{secrets.SERVER_SSH_KEY}}       # Private ssh key registered on the remote server - Required: true
+          COMMAND: ${{secrets.COMMAND}}                       # Command to be executed - Default: echo Hello world! - Required: false
+
+
         
         
