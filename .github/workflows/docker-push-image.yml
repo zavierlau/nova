@@ -40,8 +40,8 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: root
           password: ${{ secrets.SERVER_SSH_KEY }}
-          ssh_1: 'df -h'
-          ssh_2: 'docker ps'
+          ssh_1: df -h
+          ssh_2: docker ps
           #ssh_3: '<SSH_COMMAND>'
           #ssh_4: '<SSH_COMMAND>'
         
